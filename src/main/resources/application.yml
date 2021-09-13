@@ -1,0 +1,15 @@
+redis:
+  host: localhost
+  port: 6379
+  max-wait: 30000
+  max-active: 100
+  max-idle: 20
+  min-idle: 0
+  timeout: 3000
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/firstDatabase
+    username: root
+    password: 1204%#!8060FANfan
