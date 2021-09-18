@@ -30,5 +30,15 @@ database: Twitter
 
 tables: Users, Tweets, Notifications, Likes, Comments, Follower_Followee.
 
+# Follow and Unfollow workflow
+increment / decrement follower_count and followee_count for both follower and followee in users table.
+add a new piece of data into follower_followee table. 
+
+
+# Like and Unlike workflow
+Check if the key LIKE_COUNT:tweetId exists in Redis. If yes, then increment or decrement likeCount and return the updated value. 
+Then, create Runnable threads and use thread pool to add new pieces of data into user_tweet_like table.
+
+
 
 
