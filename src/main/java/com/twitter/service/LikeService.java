@@ -15,5 +15,14 @@ public class LikeService {
         this.likeDao = likeDao;
     }
 
+    public int likeTweet(long tweetId, long userId) {
+        return 1;
+
+    }
+
+    public int unLikeTweet(long tweetId, long userId) {
+        return 1;
+    }
+
 
 }

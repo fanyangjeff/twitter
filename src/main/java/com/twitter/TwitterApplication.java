@@ -14,9 +14,4 @@ public class TwitterApplication {
 		SpringApplication.run(TwitterApplication.class, args);
 	}
 
-	@Bean
-	public ExecutorService executorService () {
-		return Executors.newCachedThreadPool();
-	}
-
 }
