@@ -51,8 +51,20 @@ public class UserService {
         if (!followerExists || !followeeExists || !followed) {
             return;
         }
-        userDao.removeFollowRelationShip(followerId, followeeId);
-        userDao.decrementFolloweeById(followerId);
-        userDao.decrementFollowerById(followeeId);
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                userDao.removeFollowRelationShip(followerId, followeeId);
+            }
+        });
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                userDao.decrementFolloweeById(followerId);
+                userDao.decrementFollowerById(followeeId);
+            }
+        });
     }
 }
