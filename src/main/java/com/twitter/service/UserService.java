@@ -4,6 +4,9 @@ import com.twitter.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 @Service
@@ -66,5 +69,23 @@ public class UserService {
                 userDao.decrementFollowerById(followeeId);
             }
         });
+    }
+
+    public List<Map<String, Object>> getFolloweeList(int id) {
+        boolean userExists = userDao.userExists(id) != 0;
+        if (!userExists) {
+            return new ArrayList<>();
+        }
+
+        return userDao.getFolloweeListById(id);
+    }
+
+    public List<Map<String, Object>> getFollowerList(int id) {
+        boolean userExists = userDao.userExists(id) != 0;
+        if (!userExists) {
+            return new ArrayList<>();
+        }
+
+        return userDao.getFollowerListById(id);
     }
 }
