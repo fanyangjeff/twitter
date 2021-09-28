@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Like {
-    private long id;
+    private int id;
     private long userId;
     private long tweetId;
     private String date;

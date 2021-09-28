@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Tweet {
-    private long id;
+    private int id;
     private String content;
     private String createdTime;
     private long userId;

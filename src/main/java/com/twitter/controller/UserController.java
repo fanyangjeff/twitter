@@ -15,11 +15,11 @@ public class UserController {
 
     @RequestMapping(path = "/follow", method = {RequestMethod.GET, RequestMethod.POST})
     public void follow(@RequestParam String followerId, @RequestParam String followeeId) {
-        userService.follow(Long.parseLong(followerId), Long.parseLong(followeeId));
+        userService.follow(Integer.parseInt(followerId), Integer.parseInt(followeeId));
     }
 
     @RequestMapping(path = "/unfollow", method = {RequestMethod.GET, RequestMethod.POST})
     public void unfollow(@RequestParam String followerId, @RequestParam String followeeId) {
-        userService.unfollow(Long.parseLong(followerId), Long.parseLong(followeeId));
+        userService.unfollow(Integer.parseInt(followerId), Integer.parseInt(followeeId));
     }
 }

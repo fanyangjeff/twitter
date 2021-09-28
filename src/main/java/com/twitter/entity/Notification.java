@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Notification {
-    private long id;
+    private int id;
     private long userOneId;
     private long userTwoId;
     private String message;
