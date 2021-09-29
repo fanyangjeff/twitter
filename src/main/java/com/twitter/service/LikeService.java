@@ -30,8 +30,6 @@ public class LikeService {
 
     public int likeTweet(int tweetId, int userId) {
 
-        System.out.println(dateUtil.createTimeStamp());
-
 
         return 1;
 

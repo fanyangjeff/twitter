@@ -7,7 +7,7 @@ public class Tweet {
     private int id;
     private String content;
     private String createdTime;
-    private long userId;
-    private long commentCount;
-    private long likeCount;
+    private int userId;
+    private int commentCount;
+    private int likeCount;
 }

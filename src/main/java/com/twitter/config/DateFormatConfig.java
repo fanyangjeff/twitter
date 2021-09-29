@@ -10,6 +10,6 @@ public class DateFormatConfig {
     private String TIME_STAMP_PATTERN = "yyyy-MM-dd HH:mm:ss";
     @Bean
     public SimpleDateFormat simpleDateFormat() {
-        return new SimpleDateFormat( TIME_STAMP_PATTERN);
+        return new SimpleDateFormat(TIME_STAMP_PATTERN);
     }
 }
