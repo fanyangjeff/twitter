@@ -23,7 +23,7 @@ public class UserService {
         boolean followerExists = userDao.userExists(followeeId) != 0;
         boolean followeeExists = userDao.userExists(followeeId) != 0;
         boolean followed = userDao.hasFollowed(followerId, followeeId) != 0;
-        System.out.println(followed);
+
         //if either user does not exist or the follower has already followed the followee
         if (!followerExists || !followeeExists || followed) {
             return;

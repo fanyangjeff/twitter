@@ -3,6 +3,5 @@ create table likes (
                        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
                        user_id INT UNSIGNED,
                        tweet_id INT UNSIGNED,
-                       date TIMESTAMP,
                        PRIMARY KEY (id)
 );

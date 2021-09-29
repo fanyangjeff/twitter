@@ -13,15 +13,15 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    @RequestMapping(path = "/like/{userId}/{tweetId}", method = {RequestMethod.GET, RequestMethod.POST})
-    public int likeTweet(@PathVariable("userId") String userId, @PathVariable("tweetId") String tweetId) {
-        likeService.likeTweet(Long.parseLong(userId), Long.parseLong((tweetId)));
+    @RequestMapping(path = "/like", method = {RequestMethod.POST})
+    public int likeTweet(@RequestParam String userId, @RequestParam String tweetId) {
+        likeService.likeTweet(Integer.parseInt(userId), Integer.parseInt((tweetId)));
         return 1;
     }
 
-    @RequestMapping(path = "/unlike/{userId}/{tweetId}", method = {RequestMethod.GET, RequestMethod.POST})
-    public int unlikeTweet(@PathVariable("userId") String userId, @PathVariable("tweetId") String tweetId) {
-        likeService.unLikeTweet(Long.parseLong(userId), Long.parseLong(tweetId));
+    @RequestMapping(path = "/unlike", method = {RequestMethod.POST})
+    public int unlikeTweet(@RequestParam String userId, @RequestParam String tweetId) {
+        likeService.unLikeTweet(Integer.parseInt(userId), Integer.parseInt(tweetId));
         return 1;
     }
 }
