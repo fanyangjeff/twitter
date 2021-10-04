@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TweetService {
@@ -38,11 +39,23 @@ public class TweetService {
         return 1;
     }
 
-    public List getTweetsById(int userId) {
+    public List getTweetsByUserId(int userId) {
         boolean userExists = userDao.userExists(userId) != 0;
         if (!userExists)
             return new ArrayList();
         return tweetDao.findAllTweetsByUserId(userId);
+    }
+
+    public Map<String, Object> getTweetById(int tweetId) {
+        return tweetDao.getTweetById(tweetId);
+    }
+
+    public List<Map<String, Object>> getRecentTweets() {
+        return tweetDao.getMostTenRecentTweets();
+    }
+
+    public void deleteTweetById(int id) {
+        tweetDao.deleteTweetById(id);
     }
 
     public int updateLikeCount(long tweetId, int like) {

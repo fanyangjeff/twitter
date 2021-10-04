@@ -24,6 +24,21 @@ public class TweetController {
 
     @RequestMapping(path = "/tweets", method = {RequestMethod.GET})
     List<Map<String, Object>> getAllTweets(@RequestParam("userId") String userId) {
-        return tweetService.getTweetsById(Integer.parseInt(userId));
+        return tweetService.getTweetsByUserId(Integer.parseInt(userId));
+    }
+
+    @RequestMapping(path = "/tweet/{id}", method = {RequestMethod.GET})
+    Map<String, Object> getTweetById(@PathVariable("id") String id) {
+        return tweetService.getTweetById(Integer.parseInt(id));
+    }
+
+    @RequestMapping(path = "/tweet/feeds", method = {RequestMethod.GET})
+    List<Map<String, Object>> getRecentTweets() {
+        return tweetService.getRecentTweets();
+    }
+
+    @RequestMapping(path = "/tweet", method = {RequestMethod.DELETE})
+    void removeTweetById(@RequestParam("id") String id) {
+        tweetService.deleteTweetById(Integer.parseInt(id));
     }
 }
