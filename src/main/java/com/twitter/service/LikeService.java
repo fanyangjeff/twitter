@@ -18,7 +18,7 @@ public class LikeService {
     private final RedisUtil redisUtil;
     private final ExecutorService executorService;
 
-    private String REDIS_PREFIX = "LIKE+";
+    private String REDIS_PREFIX = "LIKE ";
 
     public LikeService (@Autowired RedisUtil redisUtil,
                         @Autowired LikeDao likeDao,
@@ -44,11 +44,22 @@ public class LikeService {
         /*create a like relationship between a user and a tweet,
         so that we can return a list of tweets liked a user or a list of users liked the tweet
          */
-        likeDao.createLike(userId, tweetId);
-        tweetDao.updateLikeCount(1, tweetId);
+        //likeDao.createLike(userId, tweetId);
+        //tweetDao.updateLikeCount(1, tweetId);
 
-        return tweetDao.getLikeCountById(tweetId);
-
+        String key = "TESTING";
+        redisUtil.set(key, 1);
+        if (!redisUtil.hasKey(key)) {
+            //redisUtil.set(key, tweetDao.getLikeCountById(tweetId) + 1);
+            redisUtil.set(key, 1);
+            System.out.println("im here");
+        } else {
+            //redisUtil.set(key, redisUtil.getInt(key) + 1);
+            System.out.println(redisUtil.get(key));
+        }
+        //System.out.println((int) redisUtil.getInt(key));
+        //return tweetDao.getLikeCountById(tweetId);
+        return 0;
     }
 
     public int unLikeTweet(int userId, int tweetId) {
