@@ -13,6 +13,9 @@ public interface TweetDao {
     String SELECT_FIELDS = "id,content,user_id userId,created_time createdTime," +
             "like_count likeCount,comment_count commentCount";
 
+    @Select("SELECT COUNT(*) from tweets where id = #{id}")
+    int tweetExists(int id);
+
     //insert a tweet, the database will initialize like_count and comment_count to zero
     @Insert("INSERT INTO " + TABLE_NAME + INSERT_FIELDS +
             "VALUES (#{content}, #{userId}, #{createdTime})")
@@ -28,11 +31,14 @@ public interface TweetDao {
     @Select("SELECT * FROM " + TABLE_NAME + " ORDER BY created_time DESC LIMIT 10")
     List<Map<String, Object>> getMostTenRecentTweets();
 
+    @Select("SELECT like_count FROM " + TABLE_NAME + " WHERE id = #{id}")
+    int getLikeCountById (@Param("id") int id);
+
     //delete a tweet by tweet id
     @Delete("DELETE FROM " + TABLE_NAME + " WHERE id = #{id}")
     void deleteTweetById(int id);
 
-    @Update("UPDATE " + TABLE_NAME + " SET like_count = #{updatedLikeCount} WHERE id = #{id}")
+    @Update("UPDATE " + TABLE_NAME + " SET like_count = #{updatedLikeCount} + like_count WHERE id = #{id}")
     void updateLikeCount(@Param("updatedLikeCount") int updatedLikeCount, @Param("id") int id);
 
 }

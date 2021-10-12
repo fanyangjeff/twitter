@@ -42,10 +42,10 @@ public interface UserDao {
     int hasFollowed(@Param("followerId") int followerId, @Param("followeeId") int followeeId);
 
     @Insert("INSERT INTO follower_followee (follower_id, followee_id) VALUES (#{followerId}, #{followeeId})")
-    void createFollowRelationship (@Param("followerId") int followerId, @Param("followeeId") int followeeId);
+    int createFollowRelationship (@Param("followerId") int followerId, @Param("followeeId") int followeeId);
 
     @Delete("DELETE from follower_followee where follower_id=#{followerId} AND followee_id=#{followeeId}")
-    void removeFollowRelationShip (@Param("followerId") int followerId, @Param("followeeId") int followeeId);
+    int removeFollowRelationShip (@Param("followerId") int followerId, @Param("followeeId") int followeeId);
 
 
 }

@@ -1,9 +1,6 @@
 package com.twitter.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface LikeDao {
@@ -11,7 +8,9 @@ public interface LikeDao {
     String INSERT_FIELDS = "(user_id, tweet_id)";
 
     @Insert("INSERT INTO " + TABLE_NAME + INSERT_FIELDS + "VALUES (#{userId}, #{tweetId})")
-    void createLike(@Param("userId") int userId, @Param("tweetId") int tweetId);
+    int createLike(@Param("userId") int userId, @Param("tweetId") int tweetId);
 
-    
+    @Delete("DELETE FROM " + TABLE_NAME + " WHERE user_id = #{userId} AND tweet_id = #{tweetId}")
+    int removeLike(@Param("userId") int userId, @Param("tweetId") int tweetId);
+
 }

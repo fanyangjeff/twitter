@@ -15,13 +15,13 @@ public class LikeController {
 
     @RequestMapping(path = "/like", method = {RequestMethod.POST})
     public int likeTweet(@RequestParam String userId, @RequestParam String tweetId) {
-        likeService.likeTweet(Integer.parseInt(userId), Integer.parseInt((tweetId)));
-        return 1;
+        int likeCount = likeService.likeTweet(Integer.parseInt(userId), Integer.parseInt((tweetId)));
+        return likeCount;
     }
 
     @RequestMapping(path = "/unlike", method = {RequestMethod.POST})
     public int unlikeTweet(@RequestParam String userId, @RequestParam String tweetId) {
-        likeService.unLikeTweet(Integer.parseInt(userId), Integer.parseInt(tweetId));
-        return 1;
+        int likeCount = likeService.unLikeTweet(Integer.parseInt(userId), Integer.parseInt(tweetId));
+        return likeCount;
     }
 }
