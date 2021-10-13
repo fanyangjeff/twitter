@@ -65,4 +65,31 @@ public class RedisUtil {
 
         return new Object();
     }
+
+    public Long increment (String key, long amount) {
+        try {
+            return redisTemplate.opsForValue().increment(key, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0L;
+    }
+
+    public Long decrement (String key, long amount) {
+        try {
+            return redisTemplate.opsForValue().decrement(key, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0L;
+    }
+
+    public void deleteKey (String key) {
+        try {
+            redisTemplate.delete(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

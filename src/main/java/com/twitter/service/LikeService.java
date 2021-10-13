@@ -35,6 +35,7 @@ public class LikeService {
     public int likeTweet(int userId, int tweetId) {
         boolean tweetExists = tweetDao.tweetExists(tweetId) != 0;
         boolean userExists = userDao.userExists(userId) != 0;
+        int likeCount = 0;
 
         //return 0 if either tweet or user does not exist by looking up its id
         if (!tweetExists || !userExists) {
@@ -47,19 +48,27 @@ public class LikeService {
         //likeDao.createLike(userId, tweetId);
         //tweetDao.updateLikeCount(1, tweetId);
 
-        String key = "TESTING";
-        redisUtil.set(key, 1);
+        String key = REDIS_PREFIX + String.valueOf(tweetId);
+        //if redis does not contain the the # likes
+
         if (!redisUtil.hasKey(key)) {
-            //redisUtil.set(key, tweetDao.getLikeCountById(tweetId) + 1);
-            redisUtil.set(key, 1);
-            System.out.println("im here");
+            System.out.println("does not contain key " + key);
+            redisUtil.set(key, tweetDao.getLikeCountById(tweetId) + 1);
         } else {
-            //redisUtil.set(key, redisUtil.getInt(key) + 1);
+            redisUtil.increment(key, 1);
             System.out.println(redisUtil.get(key));
         }
-        //System.out.println((int) redisUtil.getInt(key));
-        //return tweetDao.getLikeCountById(tweetId);
-        return 0;
+
+        likeCount = redisUtil.getInt(key);
+
+        if (redisUtil.getInt(key) % 3 == 0) {
+            redisUtil.deleteKey(key);
+            System.out.println(key +" has been deleted");
+            tweetDao.updateLikeCount(3, tweetId);
+            System.out.println("tweet database has been updated");
+        }
+
+        return likeCount;
     }
 
     public int unLikeTweet(int userId, int tweetId) {
